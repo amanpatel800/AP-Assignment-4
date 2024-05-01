@@ -1,0 +1,76 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+#map {
+    width: 100%;
+    height: 100vh; /* Full height of the viewport */
+}
+/* the following code helps create the button displays */
+.button {
+    background-color: rgba(0, 4, 255, 0.633);
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white
+}
+
+.button:hover {
+    background-color: #0066ff; 
+}
+/* the following code is for the right side tab */
+.tab {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 25%; /* Adjust width as needed */
+    height: 100%;
+    background-color: rgba(93, 93, 93, 0.796); /* Gray with 70% opacity */
+    z-index: 999; /* Ensure it's above other content */
+    padding: 10px;
+    color: white
+}
+
+.button {
+    display: block;
+    width: 100%; /* Make buttons fill the width of the container */
+    margin-bottom: 10px; /* Add some space between buttons */
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Add this CSS to style the counters*/
+.Acounter {
+    position: fixed;
+    bottom: 10px; 
+    left: 1%;
+    font-size: 24px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.Ecounter {
+    position: fixed;
+    bottom: 10px; 
+    left:25%;
+    font-size: 24px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+}
+.Ccounter {
+    position: fixed;
+    bottom: 10px; 
+    left: 50%;
+    font-size: 24px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+}

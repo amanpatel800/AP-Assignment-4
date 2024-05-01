@@ -1,0 +1,83 @@
+<!-- HTML Bolierplate -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Assignment 4</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+</head>
+ <!-- this next section adds the MapBox map -->
+ <script src='https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js'></script>
+ <link href='https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css' rel='styles' />
+ <div id='map' class="map"></div>
+ <!-- This section adds the left side tab and the content -->
+ <div class="tab", id="tab">
+    The New York City subway system looks almost like arteries throughout the city. Much like the arteries in our bodies, they serve
+   a vital role. For me, the blue lines are my most used lines. The A functions as an express line for the C, which is local. The E line
+   operates somewhat differently but serves a vital role for the connection to Queens and helpful when moving east west throughout
+   the city. Click on the buttons below to understand the importance of having both a local and express line. The animations 
+   run at a speed of one minute on the subway between stops is half a second. This animation helps show that an epxress train
+   is 3.4 minutes faster for each stop skipped. In addition to the animation, the counters at the bottom show how many stops each train
+   would make per mintue on the same time conversation as the animation. 
+<!-- Code for the three buttons  -->
+    <button class="button" id="Abutton">A Line</button> 
+    <button class="button" id="Ebutton">E Line</button>
+    <button class="button" id="Cbutton">C Line</button>
+ </div>
+ <!-- This adds the counter elements. The span id element helps the counter only update the 0 rather than the entire text -->
+ <div id="Acounter" class="Acounter">A Line Stops: <span id="AcounterValue">0</span></div>
+ <div id="Ecounter" class="Ecounter">E Line Stops: <span id="EcounterValue">0</span></div>
+ <div id="Ccounter" class="Ccounter">C Line Stops: <span id="CcounterValue">0</span></div>
+ <script>
+     mapboxgl.accessToken = 'pk.eyJ1IjoiYW1hbnBhdGVsODAwIiwiYSI6ImNsdmR5MGpuYzAzdWgyanMyeXV1OTYzMzUifQ.jyRn9cyhbNjpwphcX8OxfA';
+     const map = new mapboxgl.Map({
+         container: 'map',
+         style: 'mapbox://styles/mapbox/dark-v11',
+         center: [-73.935242, 40.730610],
+         zoom: 11
+     });
+    //   Add subway line layer to map
+      map.on('load', function () {
+            map.addSource('subway-lines', {
+                type: 'geojson',
+                data: 'Subway Lines.geojson' // Reference the GeoJSON file directly
+            });
+
+            map.addLayer({
+                id: 'subway-lines-layer',
+                type: 'line',
+                source: 'subway-lines',
+                paint: {
+                    'line-color': [
+                        'match',
+                        ['get', 'name'], // Property name in GeoJSON containing line names
+                        // Color each line differently based on its name
+                        'A-C-E', '#ADD8E6', // Blue for Line A, C, and E lines overlapping 
+                        'A', '#ADD8E6', //Only the A line
+                        'C', '#ADD8E6', //Only the C line
+                        'E', '#ADD8E6', //Only the E line
+                        'A-E', '#ADD8E6', // A and E overlap
+                        'A-C', '#ADD8E6', //A and C overlap
+                        'C-E', '#ADD8E6', //C and E overlap
+                        // Default color if line name does not match any case
+                        '#cccccc'
+                    ],
+                    'line-width': [
+                    'case',
+                    ['==', ['get', 'name'], 'A'], 3, // Set width to 4 for Line A
+                    ['==', ['get', 'name'], 'C'], 3, // Set width to 6 for Line C
+                    ['==', ['get', 'name'], 'E'], 3, // Set width to 8 for Line E
+                    ['==', ['get', 'name'], 'A-C-E'], 6, // Set width to 8 for Line A, C, and E
+                    ['==', ['get', 'name'], 'C-E'], 4, // Set width to 8 for C and E
+                    ['==', ['get', 'name'], 'A-C'], 4, // Set width to 8 for Line E
+                    ['==', ['get', 'name'], 'C-E'], 4, // Set width to 8 for lines
+                    2 // Default width
+                ],
+                }
+            });
+        });
+ </script>
+ <!-- this script below is important; I have to remember to add it awlays!!!-->
+ <script src="scripts.js"></script>
