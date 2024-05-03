@@ -1,1 +1,3 @@
 This project is meant to help New Yorkers understand the differences between the express and local lines regarding stations reached by time. The website has animations to show how quickly different lines reach stops. It also displays counters at the bottom to help readers see the vast difference between express and local lines. I opted to work only with the Blue Line since that is my most traveled line, and I had a personal reason for seeing the differences between the A and C lines. The attached screenshots show the website and the counter display shows how quickly the A train stops, whereas the C lags behind by a large margin.
+
+
